@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HospedagemService } from '../../services/domain/hospedagem.service';
 
 /**
  * Generated class for the HospedagensPage page.
@@ -15,11 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HospedagensPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl : NavController, 
+    public navParams : NavParams,
+    public hospedagemService : HospedagemService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HospedagensPage');
+    this.hospedagemService.findAll()
+      .subscribe(response => {
+        console.log(response)
+      },
+      error =>{
+        console.log(error)
+      });
   }
 
 }

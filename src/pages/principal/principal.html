@@ -4,10 +4,35 @@
     <button ion-button menuToggle>
       <ion-icon name = "menu"></ion-icon>
     </button>
-    <ion-title>Página Inicial</ion-title>
+    <ion-title><h3>Brisas Do Farol</h3></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p>Página de Inicial</p>
+
+  <ion-fab top right edge>
+    <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
+  </ion-fab>
+  <ion-list>
+    <br>
+    <button ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/cadastros.png">
+      </ion-thumbnail>
+      <h2> Cadastros </h2>
+    </button>
+    <button ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/relatorio.png">
+      </ion-thumbnail>
+      <h2> Relatórios </h2>
+    </button>
+    <button ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/msg.png">
+      </ion-thumbnail>
+      <h2> Mensagens </h2>
+    </button>
+
+  </ion-list>
 </ion-content>
