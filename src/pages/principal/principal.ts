@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the PrincipalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-principal',
@@ -20,6 +13,22 @@ export class PrincipalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrincipalPage');
+  }
+
+  cadastros() {
+    this.navCtrl.push("CadastrosPage");
+  }
+
+  relatorios(){
+    this.navCtrl.push("RelatoriosPage");
+  }
+  
+  msg(){
+    this.navCtrl.push("MsgPage");
+  }
+
+  search(){
+    this.navCtrl.push("SearchPage");
   }
 
 }

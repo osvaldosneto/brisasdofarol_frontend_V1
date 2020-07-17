@@ -24,12 +24,20 @@ export class AuthService {
     }
 
     successfulLogin(authorizationValue : string){
-        let tok = authorizationValue.substring(7) //retirando beader do token
+        let tok = authorizationValue.substring(7)
         let user : LocalUser = {
             token : tok,
             email : this.jwtHelper.decodeToken(tok).sub
         };
-        this.storage.setLocalUser(user); //guardando usuário localstorage
+        this.storage.setLocalUser(user);
+    }
+
+    refreshToken(){
+        return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`,{}, 
+        {
+            observe : 'response',
+            responseType : 'text'
+        })
     }
 
     logout(){
