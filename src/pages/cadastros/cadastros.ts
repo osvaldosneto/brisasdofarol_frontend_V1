@@ -22,4 +22,8 @@ export class CadastrosPage {
     console.log('ionViewDidLoad CadastrosPage');
   }
 
+  cadastroCliente(){
+    this.navCtrl.push("ClientePage");
+  }
+
 }
