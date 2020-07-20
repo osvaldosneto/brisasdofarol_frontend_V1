@@ -15,4 +15,16 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
+  donada(){
+    console.log("Do nada")
+  }
+
+  searchClientes(){
+    this.navCtrl.push("PickClientePage");
+  }
+
+  searchCustos(){
+    this.navCtrl.push("PickCustosPage");
+  }
+
 }

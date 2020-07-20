@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Profile Cliente</h3></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <img src="assets/imgs/avatar-blank.png">
+    <br>
+    <h1>Nome : {{cliente?.nome}}</h1>
+    <h3>Email : {{cliente?.email}}</h3>
+    <h3>Telefone : {{cliente?.telefones[0]}}</h3>
+    <br>
+  </ion-item>
+  <ion-item>
+    <br>
+    <ion-row class="tabela">
+      <ion-col>CheckIn</ion-col>
+      <ion-col>CheckOut</ion-col>
+      <ion-col>Total</ion-col>
+    </ion-row>
+    <div *ngFor="let r of cliente?.reservas">
+      <ion-row>
+        <ion-col>{{ r.checkIn }}</ion-col>
+        <ion-col>{{ r.checkOut }}</ion-col>
+        <ion-col>{{ r.total }}</ion-col>
+      </ion-row>
+    </div>
+    <br>
+  </ion-item>
+  <ion-item>
+    <button ion-button block (click)="editarCliente()">Editar hospede</button>
+    <button ion-button block color="danger" (click)="deleteCliente()">Deletar hospede</button> 
+  </ion-item>
+
+</ion-content>

@@ -25,7 +25,7 @@ export class MyApp {
     this.pages = [
       { title : 'Cadastros', component: 'CadastrosPage'},
       { title : 'Reservas', component: 'CadastrosPage'},
-      { title : 'Pesquisa', component: 'PesquisaPage'},
+      { title : 'Consultas', component: 'SearchPage'},
       { title : 'Relatório', component: 'RelatorioPage'},
       { title : 'Logout', component : ''}
     ]

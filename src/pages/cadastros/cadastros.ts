@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the CadastrosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-cadastros',
@@ -19,11 +12,23 @@ export class CadastrosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastrosPage');
+    
   }
 
   cadastroCliente(){
     this.navCtrl.push("ClientePage");
+  }
+
+  cadastroHospedagem(){
+    this.navCtrl.push("HospedagensPage")
+  }
+
+  cadastroCustos(){
+    this.navCtrl.push("CustoPage")
+  }
+
+  cadastroReservas(){
+    this.navCtrl.push("ReservasPage")
   }
 
 }

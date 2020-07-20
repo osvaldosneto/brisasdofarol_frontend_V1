@@ -11,18 +11,15 @@
 
 <ion-content padding>
 
-  <ion-fab top right edge>
-    <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
-  </ion-fab>
   <ion-list>
     <br>
-    <button ion-item>
+    <button ion-item (click)="cadastroReservas()">
       <ion-thumbnail item-start>
         <img src="assets/imgs/calendaricon.png">
       </ion-thumbnail>
       <h2> Reservas </h2>
     </button>
-    <button ion-item >
+    <button ion-item (click)="cadastroHospedagem()">
       <ion-thumbnail item-start>
         <img src="assets/imgs/houseicon.png">
       </ion-thumbnail>
@@ -34,8 +31,8 @@
       </ion-thumbnail>
       <h2> Hospedes </h2>
     </button>
-    <button ion-item >
-      <ion-thumbnail item-start >
+    <button ion-item  (click)="cadastroCustos()">
+      <ion-thumbnail item-start>
         <img src="assets/imgs/moneyicon.png">
       </ion-thumbnail>
       <h2> Custos </h2>

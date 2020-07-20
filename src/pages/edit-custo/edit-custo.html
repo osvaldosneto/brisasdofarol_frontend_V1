@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Editar Custo</h3></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="putCusto(); $event.preventDefault()">
+    <br>
+    <br>
+    <ion-item>
+      <ion-label stacked>Descrição*</ion-label>
+      <ion-select formControlName="nome" [(ngModel)]="nome">
+        <ion-option *ngFor="let i of item" [value]="i" [selected]="i == nome">{{i}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Nome inválido</p>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label position="floating">Data Pagamento</ion-label>
+      <ion-datetime formControlName="dataPagamento" [(ngModel)]="data" value="data" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.dataPagamento.dirty && formGroup.controls.dataPagamento.errors" margin-left>Preencha uma data inválido</p>
+    <br>
+    <br>  
+    <ion-item>
+      <ion-label stacked>Valor*</ion-label>
+      <ion-input formControlName="valor" value="{{custo?.valor}}" type="number"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.valor.dirty && formGroup.controls.valor.errors" margin-left>Preencha uma data inválido</p>
+    
+    <ion-item>
+      <ion-label>Observacões:</ion-label>
+      <ion-textarea formControlName="descricao" value="{{custo?.descricao}}" rows="10" cols="20" placeholder="Anotações aqui..."></ion-textarea>
+    </ion-item>
+   
+  <button ion-button block type="submit" [disabled]="formGroup.invalid">Editar</button>
+  
+  </form>
+
+</ion-content>
+
+
+<form [formGroup]="formGroup" (ngSubmit)="addCusto(); $event.preventDefault()">
+
+  <br>
+  <br>
+  <br>
+  
+ 
+<button ion-button block type="submit" [disabled]="formGroup.invalid">Cadastrar</button>

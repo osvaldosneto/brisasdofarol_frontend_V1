@@ -1,8 +1,8 @@
 export interface HospedagemDto{
     id : string,
     nome : string,
-    maximoHospedes : string,
-    valorDiaria : string,
-    valorHospedeExtra : string,
-    taxaLimpeza : string,
+    maximoHospedes? : number,
+    valorDiaria? : number,
+    valorHospedeExtra? : number,
+    taxaLimpeza? : number,
 }

@@ -5,28 +5,28 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="formGroup" (ngSubmit)="addClient(); $event.preventDefault()">
+  <form [formGroup]="formGroup" (ngSubmit)="editClient(); $event.preventDefault()">
     
     <ion-item>
       <ion-label stacked>Nome*</ion-label>
-      <ion-input formControlName="nome" type="text"></ion-input>
+      <ion-input formControlName="nome" type="text" value="{{cliente?.nome}}"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left>Valor inválido</p>
     
     <ion-item>
       <ion-label stacked>Email*</ion-label>
-      <ion-input formControlName="email" type="text"></ion-input>
+      <ion-input formControlName="email" type="text" value="{{cliente?.email}}"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors" margin-left>Email inválido</p>
 
     <ion-item>
       <ion-label stacked>Logradouro</ion-label>
-      <ion-input formControlName="logradouro" type="text"></ion-input>
+      <ion-input formControlName="logradouro" type="text" value="{{cliente?.endereco?.logradouro}}"></ion-input>
     </ion-item>
     
     <ion-item>
       <ion-label stacked>Número</ion-label>
-      <ion-input formControlName="numero" type="text"></ion-input>
+      <ion-input formControlName="numero" type="text" value="{{cliente?.endereco?.numero}}"></ion-input>
     </ion-item>
     
     <ion-item>
@@ -36,33 +36,33 @@
     
     <ion-item>
       <ion-label stacked>Bairro</ion-label>
-      <ion-input formControlName="bairro" type="text"></ion-input>
+      <ion-input formControlName="bairro" type="text" value="{{cliente?.endereco?.bairro}}"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>CEP</ion-label>
-      <ion-input formControlName="cep" type="text"></ion-input>
+      <ion-input formControlName="cep" type="text" value="{{cliente?.endereco?.cep}}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Telefone*</ion-label>
-      <ion-input formControlName="telefone1" type="text"></ion-input>
+      <ion-input formControlName="telefone1" type="text" value="{{cliente?.telefones[0]}}"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.telefone1.dirty && formGroup.controls.telefone1.errors" margin-left>Telefone inválido</p>
     
     <ion-item>
       <ion-label stacked>Telefone</ion-label>
-      <ion-input formControlName="telefone2" type="text"></ion-input>
+      <ion-input formControlName="telefone2" type="text" value="{{cliente?.telefones[1]}}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Telefone</ion-label>
-      <ion-input formControlName="telefone3" type="text"></ion-input>
+      <ion-input formControlName="telefone3" type="text" value="{{cliente?.telefones[2]}}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Estado*</ion-label>
       <ion-select formControlName="estadoId" (ionChange)="updateCidades()">
-        <ion-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-option>
+        <ion-option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}</ion-option>
       </ion-select>
     </ion-item>
     
@@ -73,7 +73,7 @@
       </ion-select>
     </ion-item>
     
-    <button ion-button block type="submit" [disabled]="formGroup.invalid">Criar conta</button>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Editar Cliente</button>
   
   </form>
 </ion-content>

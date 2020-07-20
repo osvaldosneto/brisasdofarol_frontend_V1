@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Pesquisa Custos</h3></ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="searchCusto(); $event.preventDefault()">
+    <br>
+    <ion-item>
+      <ion-label stacked>Descrição</ion-label>
+      <ion-select formControlName="nome">
+        <ion-option *ngFor="let i of item; first as f" [value]="i" [selected]="f">{{i}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label position="floating">Data inicio pesquisa</ion-label>
+      <ion-datetime formControlName="datainicio" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item>
+      <ion-label position="floating">Data fim pesquisa</ion-label>
+      <ion-datetime formControlName="datafim" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
+    </ion-item>
+    <br>
+    <button ion-button block type="submit" >Pesquisar</button>
+  </form>
+
+  <ion-item *ngIf="exist">
+    <ion-row class="tabela">
+      <ion-col>Data</ion-col>
+      <ion-col>Descrição</ion-col>
+      <ion-col>valor</ion-col>
+      <ion-col>Ação</ion-col>
+    </ion-row>
+    <div class="tabela" *ngFor="let l of lista">
+      <ion-row>
+        <ion-col>{{ l?.dataPagamento }}</ion-col>
+        <ion-col>{{ l?.nome }}</ion-col>
+        <ion-col>{{ l?.valor | currency }} </ion-col>
+        <ion-col>
+          <ion-icon name="trash" item-end  color="danger" (click)="removeCusto(l.id)"></ion-icon>
+          <ion-icon  name="add-circle" color="primary" (click)="editCusto(l.id)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-item>
+
+</ion-content>

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ClientePage } from './cliente';
+import { EditClientePage } from './edit-cliente';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { ClienteService } from '../../services/domain/cliente.service';
 
 @NgModule({
   declarations: [
-    ClientePage,
+    EditClientePage,
   ],
   imports: [
-    IonicPageModule.forChild(ClientePage),
+    IonicPageModule.forChild(EditClientePage),
   ],
   providers: [
     CidadeService,
@@ -18,4 +18,4 @@ import { ClienteService } from '../../services/domain/cliente.service';
     ClienteService
   ]
 })
-export class ClientePageModule {}
+export class EditClientePageModule {}

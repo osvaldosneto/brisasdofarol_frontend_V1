@@ -1,26 +1,26 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
-import { HospedagemDto } from "../../models/hospedagem.dto";
 import { Observable } from "rxjs/RX";
+import { ReservaDTO } from "../../models/reserva.dto";
 
 @Injectable()
-export class HospedagemService{
+export class ReservaService{
     constructor(public http : HttpClient){
 
     }
 
-    findAll() : Observable<HospedagemDto[]> {
-        return this.http.get<HospedagemDto[]>(`${API_CONFIG.baseUrl}/hospedagens`)
+    findAll() : Observable<ReservaDTO[]> {
+        return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas`)
     }
 
     findById(id: string) {
-        return this.http.get(`${API_CONFIG.baseUrl}/hospedagens/${id}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/reservas/${id}`);
     }
 
-    insert(obj : HospedagemDto) {
+    insert(obj : ReservaDTO) {
         return this.http.post(
-            `${API_CONFIG.baseUrl}/hospedagens`, 
+            `${API_CONFIG.baseUrl}/reservas`, 
             obj,
             { 
                 observe: 'response', 

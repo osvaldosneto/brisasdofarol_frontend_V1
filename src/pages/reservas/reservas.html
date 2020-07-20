@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Cadastro Reservas</h3></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="addReserva(); $event.preventDefault()">
+
+    <ion-item>
+      <ion-label stacked>Cliente*</ion-label>
+      <ion-select formControlName="idCliente">
+        <ion-option *ngFor="let c of clientes; first as a" [value]="c.id" [selected]="a">{{c.nome}} - {{c.email}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Hospedagem*</ion-label>
+      <ion-select formControlName="idHospedagem">
+        <ion-option *ngFor="let h of hospedagens; first as a" [value]="h.id" [selected]="a">{{h.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Criar conta</button>
+  
+  </form>
+</ion-content>
