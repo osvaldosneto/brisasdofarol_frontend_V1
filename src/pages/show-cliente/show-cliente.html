@@ -24,10 +24,10 @@
       <ion-col>Total</ion-col>
     </ion-row>
     <div *ngFor="let r of cliente?.reservas">
-      <ion-row>
+      <ion-row class="tabela">
         <ion-col>{{ r.checkIn }}</ion-col>
         <ion-col>{{ r.checkOut }}</ion-col>
-        <ion-col>{{ r.total }}</ion-col>
+        <ion-col>{{ r.total | currency}}</ion-col>
       </ion-row>
     </div>
     <br>

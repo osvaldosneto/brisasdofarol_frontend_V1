@@ -15,7 +15,11 @@ export class HospedagemService{
     }
 
     findById(id: string) {
-        return this.http.get(`${API_CONFIG.baseUrl}/hospedagens/${id}`);
+        return this.http.get<HospedagemDto>(`${API_CONFIG.baseUrl}/hospedagens/${id}`);
+    }
+
+    removeHospedagem(id : string){
+        return this.http.delete(`${API_CONFIG.baseUrl}/hospedagens/${id}`);
     }
 
     insert(obj : HospedagemDto) {

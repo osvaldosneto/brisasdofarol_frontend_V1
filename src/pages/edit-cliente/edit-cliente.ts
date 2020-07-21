@@ -59,7 +59,7 @@ export class EditClientePage {
       this.formGroup.controls.estadoId.setValue(this.estados[0].id);
       this.updateCidades();
     },
-    error => {});    
+    error => {});
   }
 
   updateCidades() {

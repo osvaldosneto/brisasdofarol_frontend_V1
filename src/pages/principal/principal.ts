@@ -12,7 +12,7 @@ export class PrincipalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PrincipalPage');
+
   }
 
   cadastros() {

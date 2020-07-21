@@ -38,9 +38,16 @@ export class PickCustosPage {
     this.custoService.findByNomeData(this.formGroup.value)
       .subscribe(response =>{
         this.lista = response
+        this.formatData()
         this.exist = true
       },
       error => {});
+  }
+
+  formatData(){
+    for(let l of this.lista){
+      l.dataPagamento = (l.dataPagamento.substr(0, 10).split('-').reverse().join('/'));
+    }
   }
 
   removeCusto(id : string){

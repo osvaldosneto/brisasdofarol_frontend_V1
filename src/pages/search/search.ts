@@ -12,11 +12,15 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
+   
   }
 
   donada(){
-    console.log("Do nada")
+    console.log("DoNada")
+  }
+
+  searchHospedagem(){
+    this.navCtrl.push("PickHospedagemPage");
   }
 
   searchClientes(){
