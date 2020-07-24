@@ -12,6 +12,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error_interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
-    StorageService
+    StorageService,
+    Calendar
   ]
 })
 export class AppModule {}

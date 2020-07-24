@@ -9,12 +9,12 @@
 
 <ion-content padding>
 
-  <form [formGroup]="formGroup" >
+  <form [formGroup]="formGroup" (ngSubmit)="addCusto(); $event.preventDefault()">
     <br>
     <br>
     <ion-item>
       <ion-label stacked>Descrição*</ion-label>
-      <ion-select >
+      <ion-select formControlName="nome" >
         <ion-option *ngFor="let i of item; first as f" [value]="i" [selected]="f">{{i}}</ion-option>
       </ion-select>
     </ion-item>
@@ -22,11 +22,23 @@
     <br>
     <ion-item>
       <ion-label position="floating">Data Pagamento</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
+      <ion-datetime formControlName="dataPagamento" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
     </ion-item>
     
     <br>
     
+    <ion-item>
+      <ion-label stacked>Valor*</ion-label>
+      <ion-input formControlName="valor" type="number"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.valor.dirty && formGroup.controls.valor.errors" margin-left>Preencha uma data inválido</p>
+    
+    <ion-item>
+      <ion-label>Observacões:</ion-label>
+      <ion-textarea formControlName="descricao" value="{{custo?.descricao}}" rows="10" cols="20" placeholder="Anotações aqui..."></ion-textarea>
+    </ion-item>
+
+
     
   <button ion-button block type="submit" >Cadastrar</button>
   
