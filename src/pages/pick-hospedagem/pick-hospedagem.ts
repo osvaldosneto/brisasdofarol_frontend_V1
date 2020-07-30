@@ -25,7 +25,9 @@ export class PickHospedagemPage {
       .subscribe(response =>{
         this.hospedagens = response
       },
-      error => {})
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      })
   }
 
   searchHospedagem(id : string){
@@ -34,7 +36,9 @@ export class PickHospedagemPage {
         this.hospedagem = response
         this.showHospedagem()
       },
-      error => {})
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      })
   }
   showHospedagem() {
     let alert = this.alertCtrl.create({
@@ -62,7 +66,9 @@ export class PickHospedagemPage {
         this.hospedagem = response
         this.showDeleteOk()
       },
-      error => {})
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      })
   }
 
   editHospedagem(id : string){
@@ -98,7 +104,9 @@ export class PickHospedagemPage {
       .subscribe(repsponse =>{
         this.navCtrl.push("PrincipalPage");
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   showDeletado(){

@@ -51,7 +51,9 @@ export class ClientePage {
         this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   updateCidades() {
@@ -61,7 +63,9 @@ export class ClientePage {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   addClient(){
@@ -69,7 +73,9 @@ export class ClientePage {
       .subscribe(response => {
         this.showInsertOk();
       },
-      error => {}); 
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      }); 
   }
 
   showInsertOk() {

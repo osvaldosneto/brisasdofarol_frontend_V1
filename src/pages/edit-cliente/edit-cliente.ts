@@ -81,7 +81,9 @@ export class EditClientePage {
       .subscribe(response => {
         this.showInsertOk();
       },
-      error => {}); 
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      }); 
   }
 
   showInsertOk() {

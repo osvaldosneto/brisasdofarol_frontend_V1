@@ -54,14 +54,18 @@ export class EditHospedagemPage {
         this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
 
     this.hospedagemService.findById(this.navParams.get('hospedagem_id'))
       .subscribe(response =>{
         let h = response
         this.hospedagem = h
       },
-      error => {})
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      })
   }
 
   updateCidades() {
@@ -71,8 +75,9 @@ export class EditHospedagemPage {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
-
-
+  
 }

@@ -3,52 +3,41 @@
     <button ion-button menuToggle>
       <ion-icon name = "menu"></ion-icon>
     </button>
-    <ion-title><h3>Profile Cliente</h3></ion-title>
+    <ion-title><h2>Consulta Reservas</h2></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <img src="assets/imgs/avatar-blank.png">
-    <br>
-    <h1>Nome : {{cliente?.nome}}</h1>
-    <h3>Email : {{cliente?.email}}</h3>
-    <h3>Telefone : {{cliente?.telefones[0]}}</h3>
-    <br>
-  </ion-item>
+
   <ion-item>
     <br>
     <ion-row class="tabela">
       <ion-col><h3>Local</h3></ion-col>
-      <ion-col><h3>CheckIn</h3></ion-col>
-      <ion-col><h3>CheckOut</h3></ion-col>
+      <ion-col><h3>Nome</h3></ion-col>
+      <ion-col><h3>In</h3></ion-col>
+      <ion-col><h3>Out</h3></ion-col>
       <ion-col><h3>Total</h3></ion-col>
     </ion-row>
     <div *ngFor="let r of reservas">
       <ion-row class="tabela">
         <ion-col>{{ r.hospedagem.nome }}</ion-col>
+        <ion-col>{{ r.cliente.nome }}</ion-col>
         <ion-col>{{ r.checkIn }}</ion-col>
         <ion-col>{{ r.checkOut }}</ion-col>
         <ion-col>{{ r.total | currency}}</ion-col>
+        <ion-icon name="trash" item-end  color="danger" (click)="removeReserva(r.id)"></ion-icon>
       </ion-row>
     </div>
-    <br>
   </ion-item>
   <ion-item>
-    <br>
     <div>
       <ion-row class="tabela">
         <ion-col><h3>TOTAL</h3></ion-col>
         <ion-col></ion-col>
         <ion-col></ion-col>
+        <ion-col></ion-col>
         <ion-col>{{ total | currency}}</ion-col>
       </ion-row>
     </div>
-    <br>
   </ion-item>
-  <ion-item>
-    <button ion-button block (click)="editarCliente()">Editar hospede</button>
-    <button ion-button block color="danger" (click)="deleteCliente()">Deletar hospede</button> 
-  </ion-item>
-
 </ion-content>

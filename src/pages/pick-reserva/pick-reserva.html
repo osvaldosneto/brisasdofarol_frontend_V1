@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Consulta Reservas</h3></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroupData" (ngSubmit)="pickReservaByData(); $event.preventDefault()">
+    <br>
+    <ion-item>
+      <ion-label position="center">Data</ion-label>
+      <ion-datetime formControlName="data" value="data" displayFormat="DD/MM/YYYY"></ion-datetime>
+    </ion-item>
+    <br>
+    <button ion-button block type="submit" >Search BY Data</button>
+  </form>
+
+  <form [formGroup]="formGroupId" (ngSubmit)="pickReservaById(); $event.preventDefault()">
+    <br>
+    <br>
+    <ion-item>
+      <ion-label stacked>Cliente</ion-label>
+      <ion-select formControlName="idCliente">
+        <ion-option>*Todos</ion-option>
+        <ion-option *ngFor="let c of clientes; first as a" [value]="c.id" [selected]="a">{{c.nome}} - {{c.email}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <br><br>
+    <ion-item>
+      <ion-label stacked>Hospedagem</ion-label>
+      <ion-select formControlName="idHospedagem">
+        <ion-option>*Todos</ion-option>
+        <ion-option *ngFor="let h of hospedagens; first as a" [value]="h.id" [selected]="a" >{{h.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button block type="submit">Search BY Hospedagem/Cliente</button>
+  </form>
+</ion-content>

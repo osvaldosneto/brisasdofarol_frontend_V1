@@ -30,16 +30,14 @@ export class CustoPage {
       });
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   addCusto(){
     this.custoService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk();
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   showInsertOk() {

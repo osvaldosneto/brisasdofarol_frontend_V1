@@ -15,6 +15,7 @@ export class StorageService{
     }
 
     setLocalUser(obj : LocalUser){
+        
         if(obj == null){
             localStorage.removeItem(STORAGE_KEYS.localUser)
         } else {

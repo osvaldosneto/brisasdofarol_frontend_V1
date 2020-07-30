@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ShowClientePage } from './show-cliente';
-import { ClienteService } from '../../services/domain/cliente.service';
+import { ShowReservasPage } from './show-reservas';
 import { ReservaService } from '../../services/domain/reserva.service';
 
 @NgModule({
   declarations: [
-    ShowClientePage,
+    ShowReservasPage,
   ],
   imports: [
-    IonicPageModule.forChild(ShowClientePage),
+    IonicPageModule.forChild(ShowReservasPage),
   ],
   providers: [
-    ClienteService,
     ReservaService
   ]
 })
-export class ShowClientePageModule {}
+export class ShowReservasPageModule {}

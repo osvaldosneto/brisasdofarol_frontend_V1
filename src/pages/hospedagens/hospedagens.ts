@@ -51,7 +51,9 @@ export class HospedagensPage {
         this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   updateCidades() {
@@ -61,7 +63,9 @@ export class HospedagensPage {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   addHospedagem(){
@@ -69,7 +73,9 @@ export class HospedagensPage {
       .subscribe(response => {
         this.showInsertOk();
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   showInsertOk() {

@@ -53,13 +53,17 @@ export class ReservasPage {
         this.formGroup.controls.tipoIntermedio.setValue(1);
         this.setNumeroHospedes(Number(this.hospedagens[0].maximoHospedes))
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
     this.clienteService.findAll()
       .subscribe(response =>{
         this.clientes = response
         this.formGroup.controls.idCliente.setValue(this.clientes[0].id)
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   updateHospedagem(){
@@ -69,7 +73,9 @@ export class ReservasPage {
         console.log(this.hospedagem)    
         this.setNumeroHospedes(Number(this.hospedagem.maximoHospedes))
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   setNumeroHospedes(n : Number){
@@ -88,7 +94,9 @@ export class ReservasPage {
             this.confirmaReserva()
           })
       },
-      error => {}) 
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      }) 
   }
 
   confirmaReserva(){
@@ -107,13 +115,13 @@ export class ReservasPage {
         {text: 'Valor total : ' + this.calculoTotal()},
        
         {
-          text: 'Sim',
+          text: 'Confirmar',
           handler: () => {
             this.insertReserva()
           }
         },
         {
-          text: 'Não',
+          text: 'Editar',
           handler: () => {
           }
         }
@@ -123,9 +131,12 @@ export class ReservasPage {
   }
 
   insertReserva(){
+    console.log(this.formGroup.value)
     this.reservaService.insert(this.formGroup.value)
       .subscribe(response =>{
         this.showInsertOk();
+      },
+      error =>{
       })
   }
 
@@ -154,7 +165,7 @@ export class ReservasPage {
     } else {
       total = this.hospedagem.valorDiaria * diff
     }
-    if(this.formGroup.value.taxaLimpeza == 1){
+    if(this.formGroup.value.tipoLimpeza == 1){
       total = total + 50
     }
     total = total - this.formGroup.value.desconto

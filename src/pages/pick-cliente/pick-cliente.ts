@@ -41,7 +41,9 @@ export class PickClientePage {
       .subscribe(response => {
         this.clientes = response;
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   getn(){

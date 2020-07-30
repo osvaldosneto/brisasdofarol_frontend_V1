@@ -1,63 +1,51 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ClienteService } from '../../services/domain/cliente.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ReservaService } from '../../services/domain/reserva.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-show-cliente',
-  templateUrl: 'show-cliente.html',
+  selector: 'page-show-reservas',
+  templateUrl: 'show-reservas.html',
 })
-export class ShowClientePage {
+export class ShowReservasPage {
 
-  cliente : any
-  reservas: any
-  total : Number
+  reservas: any[]
+  total: Number
+  id : string
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public clienteService: ClienteService,
-    public reservaService: ReservaService ){
+    public reservaService: ReservaService) {
+
+      this.reservas = this.navParams.get('reservas')
 
   }
 
   ionViewDidLoad() {
-    let id = this.navParams.get('cliente_id');
-    this.clienteService.findById(id)
-      .subscribe(response => {
-        this.cliente = response
-        console.log("Id Cliente : " + this.navParams.get('cliente_id'))
-        this.reservaService.findByNome(this.navParams.get('cliente_id'))
-          .subscribe(response =>{
-            this.reservas = response
-            this.formatDataReserva();
-          })
-      },
-      error => {
-        this.navCtrl.setRoot("PrincipalPage");
-      });
+    this.formatDataReserva();
   }
 
   formatDataReserva(){
     let soma = 0
     for(let r of this.reservas){
       r.checkIn = (r.checkIn.substr(0, 10).split('-').reverse().join('/'));
-      r.checkOut = (r.checkIn.substr(0, 10).split('-').reverse().join('/'));
+      r.checkOut = (r.checkOut.substr(0, 10).split('-').reverse().join('/'));
       soma += Number(r.total)
     }
     this.total = soma
   }
 
-  deleteCliente(){
+  removeReserva(id: string){
+    this.id = id
     this.showDeleteOk()
   }
 
   showDeleteOk() {
     let alert = this.alertCtrl.create({
-      title: 'Deletando Cliente!',
-      message: 'Você tem certeza que deseja excluir o cliente ' + this.cliente.nome,
+      title: 'Deletando Reserva!',
+      message: 'Você tem certeza que deseja excluir está reserva!!',
       enableBackdropDismiss: false,
       buttons: [
         {
@@ -65,7 +53,6 @@ export class ShowClientePage {
           handler: () => {
             this.confirmaDeleta()
             this.showDeletado()
-            this.navCtrl.setRoot("PrincipalPage");
           }
         },
         {
@@ -81,7 +68,7 @@ export class ShowClientePage {
   showDeletado(){
     let alert = this.alertCtrl.create({
       title: 'Deletado!',
-      message: 'Cliente deletado com sucesso',
+      message: 'Custo deletado com sucesso',
       enableBackdropDismiss: false,
       buttons: [
         {
@@ -96,17 +83,13 @@ export class ShowClientePage {
   }
 
   confirmaDeleta(){
-    this.clienteService.delete(this.cliente.id)
+    this.reservaService.delete(this.id)
       .subscribe(repsponse =>{
         this.navCtrl.push("PrincipalPage");
       },
       error => {
-        this.navCtrl.setRoot("PrincipalPage");
+        this.navCtrl.setRoot("HomePage");
       });
-  }
-
-  editarCliente(){
-    this.navCtrl.push("EditClientePage", {cliente_id : this.cliente.id});
   }
 
 }

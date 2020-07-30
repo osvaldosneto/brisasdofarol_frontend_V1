@@ -15,8 +15,8 @@ export class SearchPage {
    
   }
 
-  donada(){
-    console.log("DoNada")
+  searchReserva(){
+    this.navCtrl.push("PickReservaPage");
   }
 
   searchHospedagem(){

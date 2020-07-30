@@ -1,10 +1,32 @@
-
 <ion-header>
   <ion-navbar>
-    <ion-title>msg</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h3>Email Hospedes</h3></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-item>
+    <ion-toolbar>
+      <ion-searchbar placeholder="Digite um nome"
+                [(ngModel)]="queryText"
+                (ionInput)="filterCliente($event)"
+                clearInput>           
+      </ion-searchbar>
+    </ion-toolbar>
+  </ion-item>
+ 
+  <ion-item *ngIf="getn() != null">
+    <ion-list>
+      <ion-item no-lines  *ngFor="let cliente of clientes">
+        <h3>{{cliente.nome}} - {{cliente.email}}</h3>
+        <ion-icon name="send-outline" item-end (click)="enviarEmailCliente(cliente.id)"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+
+  <button ion-button block outline (click)="sendAll()">Enviar email a todos</button>
 
 </ion-content>

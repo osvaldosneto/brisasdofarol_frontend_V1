@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ShowClientePage } from './show-cliente';
+import { SendemailPage } from './sendemail';
 import { ClienteService } from '../../services/domain/cliente.service';
-import { ReservaService } from '../../services/domain/reserva.service';
 
 @NgModule({
   declarations: [
-    ShowClientePage,
+    SendemailPage,
   ],
   imports: [
-    IonicPageModule.forChild(ShowClientePage),
+    IonicPageModule.forChild(SendemailPage),
   ],
   providers: [
     ClienteService,
-    ReservaService
   ]
 })
-export class ShowClientePageModule {}
+export class SendemailPageModule {}

@@ -23,6 +23,7 @@ export class MyApp {
     this.initializeApp();
     
     this.pages = [
+      { title : 'Principal', component: 'PrincipalPage'},
       { title : 'Cadastros', component: 'CadastrosPage'},
       { title : 'Reservas', component: 'CadastrosPage'},
       { title : 'Consultas', component: 'SearchPage'},
@@ -43,6 +44,7 @@ export class MyApp {
     switch (page.title) {
       case 'Logout':
         this.auth.logout();
+        console.log("logout...")
         this.nav.setRoot('HomePage');
         break;
 

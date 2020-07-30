@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
 import { ClienteDTO } from "../../models/cliente.dto";;
 import { Observable } from "rxjs/RX";
+import { MsgDTO } from "../../models/msg.dto";
 
 @Injectable()
 export class ClienteService {
@@ -23,10 +24,6 @@ export class ClienteService {
         return this.http.delete(`${API_CONFIG.baseUrl}/clientes/${id}`);
     }
  
-    findAllByName(nome: string){
-        return this.http.get(`${API_CONFIG.baseUrl}/clientes/findallbynome?nome=${nome}`);
-    }
-
     deleteEmail(id: string){
         return this.http.get(`${API_CONFIG.baseUrl}/clientes/deletemail/${id}`);
     }
@@ -52,4 +49,27 @@ export class ClienteService {
             }
         ); 
     }
+
+    sendEmail(obj: MsgDTO){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes/sendemail`, 
+            obj,
+            { 
+                observe: 'response', 
+                responseType: 'text'
+            }
+        ); 
+    }
+
+    sendEmailAll(obj: MsgDTO){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes/sendallemail`, 
+            obj,
+            { 
+                observe: 'response', 
+                responseType: 'text'
+            }
+        ); 
+    }
+
 }

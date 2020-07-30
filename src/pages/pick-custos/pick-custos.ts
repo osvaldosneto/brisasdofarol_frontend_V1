@@ -41,7 +41,9 @@ export class PickCustosPage {
         this.formatData()
         this.exist = true
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   formatData(){
@@ -101,7 +103,9 @@ export class PickCustosPage {
       .subscribe(repsponse =>{
         this.navCtrl.push("PrincipalPage");
       },
-      error => {});
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   editCusto(id : string){

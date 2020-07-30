@@ -44,7 +44,9 @@ export class EditCustoPage {
         this.data = this.custo.dataPagamento
         this.custo.dataPagamento = this.custo.dataPagamento.substr(0, 10).split('-').reverse().join('/');
       },
-      error => {})
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      })
   }
 
   putCusto(){

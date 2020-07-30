@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Envio Email Hospede</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <br>
+    <h1>Nome : {{cliente?.nome}}</h1>
+    <h3>Email : {{cliente?.email}}</h3>
+    <h3>Telefone : {{cliente?.telefones[0]}}</h3>
+    <br>
+  </ion-item>
+
+  <form [formGroup]="formGroup" (ngSubmit)="sendMsg(); $event.preventDefault()">
+    <ion-item>
+      <ion-label>Menssagem:</ion-label>
+      <ion-textarea formControlName="msg" value="{{custo?.descricao}}" rows="20" cols="40" placeholder="Anotações aqui..."></ion-textarea>
+    </ion-item>
+    <button ion-button block disabled={{alert}} type="submit" >Enviar</button>
+  </form>
+
+</ion-content>
