@@ -50,7 +50,6 @@ export class EditCustoPage {
   }
 
   putCusto(){
-    console.log(this.formGroup.value)
     this.custoService.putCusto(this.formGroup.value, this.id)
       .subscribe(response => {
         this.showInsertOk();

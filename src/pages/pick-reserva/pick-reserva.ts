@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -7,7 +7,6 @@ import { HospedagemService } from '../../services/domain/hospedagem.service';
 import { HospedagemDto } from '../../models/hospedagem.dto';
 import { ReservaSearchDTO } from '../../models/reservaSearch.dto';
 import { ReservaService } from '../../services/domain/reserva.service';
-import { ReservaDTO } from '../../models/reserva.dto';
 
 @IonicPage()
 @Component({
@@ -29,7 +28,8 @@ export class PickReservaPage {
     public formBuilder: FormBuilder,
     public clienteService : ClienteService,
     public hospedagemService: HospedagemService,
-    public reservaService: ReservaService) {
+    public reservaService: ReservaService,
+    public loadingCtrl: LoadingController) {
 
       this.exist = false
       this.formGroupData = this.formBuilder.group({
@@ -63,21 +63,37 @@ export class PickReservaPage {
   }
 
   pickReservaByData(){
+    let loader = this.presentLoading();
     this.reservaService.findByData(this.formGroupData.value)
       .subscribe(response =>{
         this.navCtrl.push("ShowReservasPage", {reservas: response})
+        loader.dismiss();
       },
       error =>{
+        loader.dismiss();
         this.navCtrl.setRoot("HomePage");
       })
   }
 
   pickReservaById(){
+    let loader = this.presentLoading();
     this.reservaService.findByNomeData(this.formGroupId.value)
       .subscribe(response =>{
         this.navCtrl.push("ShowReservasPage", {reservas: response})
+        loader.dismiss();
       },
-      error =>{})
+      error =>{
+        loader.dismiss();
+        this.navCtrl.setRoot("HomePage");
+      })
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

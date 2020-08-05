@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustoService } from '../../services/domain/custo.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
@@ -18,7 +18,8 @@ export class CustoPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public custoService: CustoService,
-    public alertCtrl: AlertController,) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
 
       this.item = ["Energia", "Internet", "Água", "Outros"]
 
@@ -31,11 +32,14 @@ export class CustoPage {
   }
 
   addCusto(){
+    let loader = this.presentLoading();
     this.custoService.insert(this.formGroup.value)
       .subscribe(response => {
+        loader.dismiss();
         this.showInsertOk();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -55,6 +59,14 @@ export class CustoPage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 
@@ -17,20 +17,23 @@ export class MsgPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     this.carregaClientes()
-    console.log()
   }
 
   carregaClientes(){
+    let loader = this.presentLoading();
     this.clienteService.findAll()
       .subscribe(response => {
         this.clientes = response;
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -57,6 +60,14 @@ export class MsgPage {
 
   sendAll(){
     this.navCtrl.push("SendemailallPage")
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

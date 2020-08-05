@@ -20,9 +20,8 @@
  
   <ion-item *ngIf="getn() != null">
     <ion-list>
-      <ion-item no-lines  *ngFor="let cliente of clientes">
+      <ion-item no-lines  *ngFor="let cliente of clientes" item-end (click)="enviarEmailCliente(cliente.id)">
         <h3>{{cliente.nome}} - {{cliente.email}}</h3>
-        <ion-icon name="send-outline" item-end (click)="enviarEmailCliente(cliente.id)"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-item>

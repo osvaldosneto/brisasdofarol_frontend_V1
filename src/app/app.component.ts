@@ -27,7 +27,7 @@ export class MyApp {
       { title : 'Cadastros', component: 'CadastrosPage'},
       { title : 'Reservas', component: 'CadastrosPage'},
       { title : 'Consultas', component: 'SearchPage'},
-      { title : 'Relatório', component: 'RelatorioPage'},
+      { title : 'Relatório', component: 'RelatoriosPage'},
       { title : 'Logout', component : ''}
     ]
   

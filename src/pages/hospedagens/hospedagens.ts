@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HospedagemService } from '../../services/domain/hospedagem.service';
 import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
@@ -26,7 +26,8 @@ export class HospedagensPage {
     public estadoService: EstadoService,
     public cidadeService: CidadeService,
     public alertCtrl: AlertController,
-    public hospedagemService : HospedagemService) {
+    public hospedagemService : HospedagemService,
+    public loadingCtrl : LoadingController) {
 
       this.formGroup = this.formBuilder.group({
         nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
@@ -58,22 +59,28 @@ export class HospedagensPage {
 
   updateCidades() {
     let estado_id = this.formGroup.value.estadoId;
+    let loader = this.presentLoading();
     this.cidadeService.findAll(estado_id)
       .subscribe(response => {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
 
   addHospedagem(){
+    let loader = this.presentLoading();
     this.hospedagemService.insert(this.formGroup.value)
       .subscribe(response => {
+        loader.dismiss();
         this.showInsertOk();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -93,6 +100,14 @@ export class HospedagensPage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

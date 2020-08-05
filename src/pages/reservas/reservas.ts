@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HospedagemDto } from '../../models/hospedagem.dto';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
@@ -29,7 +29,8 @@ export class ReservasPage {
     public hospedagemService : HospedagemService,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
-    public reservaService: ReservaService) {
+    public reservaService: ReservaService,
+    public loadingCtrl: LoadingController) {
 
       this.formGroup = this.formBuilder.group({
         idHospedagem: [ , [Validators.required]],
@@ -67,13 +68,15 @@ export class ReservasPage {
   }
 
   updateHospedagem(){
+    let loader = this.presentLoading();
     this.hospedagemService.findById(this.formGroup.value.idHospedagem)
       .subscribe(response => {
-        this.hospedagem = response
-        console.log(this.hospedagem)    
+        this.hospedagem = response   
         this.setNumeroHospedes(Number(this.hospedagem.maximoHospedes))
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -85,16 +88,19 @@ export class ReservasPage {
   }
 
   addReserva(){
+    let loader = this.presentLoading();
     this.clienteService.findById(this.formGroup.value.idCliente)
       .subscribe(response =>{
         this.cliente = response['nome']
         this.hospedagemService.findById(this.formGroup.value.idHospedagem)
           .subscribe(response =>{
             this.hospedagem = response
+            loader.dismiss();
             this.confirmaReserva()
           })
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       }) 
   }
@@ -131,9 +137,10 @@ export class ReservasPage {
   }
 
   insertReserva(){
-    console.log(this.formGroup.value)
+    let loader = this.presentLoading();
     this.reservaService.insert(this.formGroup.value)
       .subscribe(response =>{
+        loader.dismiss();
         this.showInsertOk();
       },
       error =>{
@@ -176,6 +183,14 @@ export class ReservasPage {
     const dateIn = moment(day1, 'YYYY-MM-DD')
     const dateOut = moment(day2, 'YYYY-MM-DD')
     return dateOut.diff(dateIn, 'days')
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

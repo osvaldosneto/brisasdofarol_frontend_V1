@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name = "menu"></ion-icon>
+    </button>
+    <ion-title><h2>Relatório</h2></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <h2 class="title">Reservas</h2>
+    <br>
+    <ion-row class="tabela">
+      <ion-col><h3>Local</h3></ion-col>
+      <ion-col><h3>Nome</h3></ion-col>
+      <ion-col><h3>In</h3></ion-col>
+      <ion-col><h3>Out</h3></ion-col>
+      <ion-col><h3>Total</h3></ion-col>
+    </ion-row>
+    <div *ngFor="let r of reservas">
+      <ion-row class="tabela">
+        <ion-col>{{ r.hospedagem.nome }}</ion-col>
+        <ion-col>{{ r.cliente.nome }}</ion-col>
+        <ion-col>{{ r.checkIn }}</ion-col>
+        <ion-col>{{ r.checkOut }}</ion-col>
+        <ion-col>{{ r.total | currency}}</ion-col>
+      </ion-row>
+    </div>
+  </ion-item>
+  <ion-item>
+    <div>
+      <ion-row class="tabela">
+        <ion-col><h3>TOTAL</h3></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col><h4>{{ totalReceita | currency}}</h4></ion-col>
+      </ion-row>
+    </div>
+  </ion-item>
+  <br>
+  
+  <ion-item>
+    <h2 class="title">Custos</h2>
+    <br>
+    <ion-row class="tabela">
+      <ion-col><h3>Descrição</h3></ion-col>
+      <ion-col><h3> </h3></ion-col>
+      <ion-col><h3>Data</h3></ion-col>
+      <ion-col><h3> </h3></ion-col>
+      <ion-col><h3>valor</h3></ion-col>
+    </ion-row>
+    <div class="tabela" *ngFor="let l of custos">
+      <ion-row>
+        <ion-col>{{ l?.nome }}</ion-col> 
+        <ion-col> </ion-col>
+        <ion-col>{{ l?.dataPagamento }}</ion-col>
+        <ion-col> </ion-col>
+        <ion-col>{{ l?.valor | currency }} </ion-col>
+      </ion-row>
+    </div>
+  </ion-item>
+  <ion-item>
+    <div>
+      <ion-row class="tabela">
+        <ion-col><h3>TOTAL</h3></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col><h4>{{ totalCusto | currency}}</h4></ion-col>
+      </ion-row>
+    </div>
+  </ion-item>
+  <br>
+
+  <ion-item>
+    <h2 class="title">Balancete</h2>
+    <h2 class="title">{{datas.datainicio}} até {{datas.datafim}}</h2>
+    <br>
+    <div>
+      <ion-row class="tabela">
+        <ion-col><h3>Receita Bruta</h3></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col><h4>{{ totalReceita | currency}}</h4></ion-col>
+      </ion-row>
+
+      <ion-row class="tabela">
+        <ion-col><h3>Custos</h3></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col><h4>{{ totalCusto | currency}}</h4></ion-col>
+      </ion-row>
+
+      <ion-row class="tabela">
+        <ion-col><h3>Total</h3></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col><h4>{{ totalReceita-totalCusto | currency}}</h4></ion-col>
+      </ion-row> 
+    </div>
+  </ion-item>
+
+</ion-content>

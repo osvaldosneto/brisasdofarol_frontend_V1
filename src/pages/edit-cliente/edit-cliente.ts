@@ -75,7 +75,6 @@ export class EditClientePage {
   editClient(){
     this.clienteService.deleteEmail(this.id)
       .subscribe(response =>{
-        console.log(response)
       })
     this.clienteService.putCliente(this.formGroup.value, this.id)
       .subscribe(response => {

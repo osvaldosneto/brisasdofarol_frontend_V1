@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
@@ -18,7 +18,8 @@ export class SendemailallPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public loadingCtrl: LoadingController) {
 
       this.formGroup = this.formBuilder.group({
         msg: ['', []],
@@ -28,11 +29,14 @@ export class SendemailallPage {
 
   sendMsg(){
     this.alert = false
+    let loader = this.presentLoading();
     this.clienteService.sendEmailAll(this.formGroup.value)
       .subscribe(response =>{
+        loader.dismiss();
         this.showMsgOk();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       })
   }
@@ -53,6 +57,14 @@ export class SendemailallPage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

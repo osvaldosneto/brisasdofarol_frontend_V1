@@ -54,4 +54,12 @@ export class ReservaService{
         return this.http.delete(`${API_CONFIG.baseUrl}/reservas/${id}`);
     }
 
+    findByCheckIn(obj: any){
+        if(obj.datainicio == null && obj.datafim == null){
+            return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/all`)
+        } else {
+            return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/entredatas?dia1=${obj.datainicio}&dia2=${obj.datafim}`);
+        }
+    }
+
 }

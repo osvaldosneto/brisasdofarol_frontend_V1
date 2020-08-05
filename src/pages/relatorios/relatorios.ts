@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -8,11 +9,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RelatoriosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formGroup: FormGroup;
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public formBuilder: FormBuilder) {
+
+    this.formGroup = this.formBuilder.group({
+      datainicio : [ , []],
+      datafim : [ , []],
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RelatoriosPage');
+  gerarRelatorio(){
+    this.navCtrl.push("ShowRelatorioPage", {datas : this.formGroup.value})
   }
 
 }

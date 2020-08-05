@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HospedagemService } from '../../services/domain/hospedagem.service';
 import { HospedagemDto } from '../../models/hospedagem.dto';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
@@ -17,7 +17,8 @@ export class PickHospedagemPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public hospedagemService: HospedagemService,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -31,12 +32,15 @@ export class PickHospedagemPage {
   }
 
   searchHospedagem(id : string){
+    let loader = this.presentLoading();
     this.hospedagemService.findById(id)
       .subscribe(response =>{
         this.hospedagem = response
         this.showHospedagem()
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       })
   }
@@ -61,9 +65,11 @@ export class PickHospedagemPage {
   }
 
   removeHospedagem(id : string){
+    let loader = this.presentLoading();
     this.hospedagemService.findById(id)
       .subscribe(response =>{
         this.hospedagem = response
+        loader.dismiss();
         this.showDeleteOk()
       },
       error => {
@@ -100,11 +106,14 @@ export class PickHospedagemPage {
   }
 
   confirmaDeleta(){
+    let loader = this.presentLoading();
     this.hospedagemService.removeHospedagem(this.hospedagem.id)
       .subscribe(repsponse =>{
+        loader.dismiss();
         this.navCtrl.push("PrincipalPage");
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -125,4 +134,13 @@ export class PickHospedagemPage {
     });
     alert.present();
   }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
+  }
+
 }

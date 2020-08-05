@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
@@ -25,7 +25,8 @@ export class ClientePage {
     public estadoService: EstadoService,
     public cidadeService: CidadeService,
     public alertCtrl: AlertController,
-    public clienteService: ClienteService
+    public clienteService: ClienteService,
+    public loadingCtrl: LoadingController
     ) {
 
       this.formGroup = this.formBuilder.group({
@@ -58,19 +59,24 @@ export class ClientePage {
 
   updateCidades() {
     let estado_id = this.formGroup.value.estadoId;
+    let loader = this.presentLoading();
     this.cidadeService.findAll(estado_id)
       .subscribe(response => {
         this.cidades = response;
         this.formGroup.controls.cidadeId.setValue(null);
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
 
   addClient(){
+    let loader = this.presentLoading();
     this.clienteService.insert(this.formGroup.value)
       .subscribe(response => {
+        loader.dismiss();
         this.showInsertOk();
       },
       error => {
@@ -93,6 +99,14 @@ export class ClientePage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

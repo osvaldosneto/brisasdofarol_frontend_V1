@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ReservaService } from '../../services/domain/reserva.service';
@@ -19,7 +19,8 @@ export class ShowClientePage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public clienteService: ClienteService,
-    public reservaService: ReservaService ){
+    public reservaService: ReservaService,
+    public loadingCtrl: LoadingController){
 
   }
 
@@ -96,17 +97,28 @@ export class ShowClientePage {
   }
 
   confirmaDeleta(){
+    let loader = this.presentLoading();
     this.clienteService.delete(this.cliente.id)
       .subscribe(repsponse =>{
+        loader.dismiss();
         this.navCtrl.push("PrincipalPage");
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
 
   editarCliente(){
     this.navCtrl.push("EditClientePage", {cliente_id : this.cliente.id});
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

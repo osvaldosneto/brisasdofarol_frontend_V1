@@ -58,4 +58,14 @@ export class CustoService {
         return this.http.get<CustoDTO[]>(`${API_CONFIG.baseUrl}/custos/filtro?dia1=${obj.datainicio}&dia2=${obj.datafim}&nome=${obj.nome}`);
     }
 
+    findByNome(obj : any){
+        if(obj.datainicio == null){
+            obj.datainicio = ""
+        }
+        if(obj.datafim == null){
+            obj.datafim = ""
+        }
+        return this.http.get<CustoDTO[]>(`${API_CONFIG.baseUrl}/custos/filtro?dia1=${obj.datainicio}&dia2=${obj.datafim}&nome=`);
+    }
+
 }
