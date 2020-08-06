@@ -5,6 +5,6 @@ Neste projeto é possível o cadastro, edição e exclusão (desde que não exis
 Nossa tela principal possui a seguinte aparência.
 
 <div class="container">
-    <img src="principal.jpg" width="320" height="205" />
+    <img src="principal.jpg" width="150" height="200" />
 </div>
 
