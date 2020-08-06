@@ -6,6 +6,6 @@ Nossa tela principal possui a seguinte aparência.
 
 <div>
     <img src="principal.jpg" width="130" height="250" />
-  <h2>Tela LogIn</h2>
+  <h4>Tela LogIn</h4>
 </div>
 
