@@ -22,6 +22,6 @@ Segue abaixo algumas das outras paginas disponíveis no sistema.
   <img src="sidemenu.jpg" width="130" height="250" />
   <h4>SideMenu</h4>
   <img src="relatorio.jpg" width="130" height="250" />
-  <h4>Menu Lateral</h4>
+  <h4>Relatório</h4>
 </div>
 
