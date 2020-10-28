@@ -33,32 +33,42 @@ export class PickReservaPage {
 
       this.exist = false
       this.formGroupData = this.formBuilder.group({
-        data : [ , ],
+        dataInicio : [ , ],
+        dataFim : [ , ],
       });
 
       this.formGroupId = this.formBuilder.group({
         idCliente: [ , []],
         idHospedagem : [ , []],
       });
-
   }
 
-  ionViewDidLoad() {
-    this.hospedagemService.findAll()
-      .subscribe(response => {
-        this.hospedagens = response;
-        this.formGroupId.controls.idHospedagem.setValue("*Todos");
-      },
-      error => {
-        this.navCtrl.setRoot("HomePage");
-      });
+  loadClientes(){
+    let loader = this.presentLoading();
     this.clienteService.findAll()
       .subscribe(response =>{
         this.clientes = response
         this.formGroupId.controls.idCliente.setValue("*Todos")
+        loader.dismiss()
       },
       error => {
-        this.navCtrl.setRoot("HomePage");
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
+      });
+  }
+
+  ionViewDidLoad() {
+    let loader = this.presentLoading();
+    this.hospedagemService.findAll()
+      .subscribe(response => {
+        this.hospedagens = response;
+        this.formGroupId.controls.idHospedagem.setValue("*Todos");
+        this.loadClientes()
+        loader.dismiss()
+      },
+      error => {
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
       });
   }
 
@@ -66,12 +76,12 @@ export class PickReservaPage {
     let loader = this.presentLoading();
     this.reservaService.findByData(this.formGroupData.value)
       .subscribe(response =>{
-        this.navCtrl.push("ShowReservasPage", {reservas: response})
         loader.dismiss();
+        this.navCtrl.push("ShowReservasPage", {reservas: response})
       },
       error =>{
         loader.dismiss();
-        this.navCtrl.setRoot("HomePage");
+        this.navCtrl.setRoot("PrincipalPage");
       })
   }
 
@@ -84,7 +94,7 @@ export class PickReservaPage {
       },
       error =>{
         loader.dismiss();
-        this.navCtrl.setRoot("HomePage");
+        this.navCtrl.setRoot("PrincipalPage");
       })
   }
 

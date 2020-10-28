@@ -1,7 +1,29 @@
 page-principal {
 
+    .toolbar-background {
+        background-color: rgb(115, 175, 154);
+    }
+
     h3 {
+        font-family: "Arial Black", Gadget, sans-serif;
         text-align: center;
+    }
+
+    .but {
+        font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 40px;
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        color: rgb(58, 18, 18);
+        font-weight: 700;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: small-caps;
+        text-transform: none;
+        text-align: center;
+        background: rgb(129, 196, 172);
+        border: 1px groove #70613B;
+        border-radius: 40px 0px 40px 29px;
     }
 
     img {
@@ -11,6 +33,22 @@ page-principal {
         margin: auto;
         display: block;
         padding: 10px;
+        background: rgb(129, 196, 172);
+    }
+
+    .nav{
+        font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 40px;
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        color: rgb(201, 157, 76);
+        font-weight: 700;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: small-caps;
+        text-transform: none;
+        text-align: center;
+        background: rgb(119, 126, 112);
     }
 
 }

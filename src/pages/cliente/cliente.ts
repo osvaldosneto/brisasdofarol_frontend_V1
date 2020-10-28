@@ -46,13 +46,16 @@ export class ClientePage {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.estadoService.findAll()
       .subscribe(response => {
         this.estados = response;
         this.formGroup.controls.estadoId.setValue(this.estados[0].id);
         this.updateCidades();
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -80,6 +83,7 @@ export class ClientePage {
         this.showInsertOk();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       }); 
   }
@@ -93,7 +97,7 @@ export class ClientePage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.setRoot("CadastrosPage");
+            this.navCtrl.setRoot("PrincipalPage");
           }
         }
       ]

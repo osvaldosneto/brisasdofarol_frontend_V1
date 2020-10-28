@@ -1,5 +1,5 @@
 export interface ReservaDTO{
-    id : string,
+    id? : string,
     checkIn? : string,
     checkOut? : string,
     numeroHospedes? : number,

@@ -20,7 +20,7 @@
  
   <ion-item *ngIf="getn() != null">
     <ion-list>
-      <ion-item no-lines  *ngFor="let cliente of clientes">
+      <ion-item no-lines  *ngFor="let cliente of auxClientes">
         <h3>{{cliente.nome}} - {{cliente.email}}</h3>
         <ion-icon name="search" item-end (click)="editarCliente(cliente.id)"></ion-icon>
       </ion-item>

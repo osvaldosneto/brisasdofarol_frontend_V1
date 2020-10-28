@@ -13,7 +13,7 @@ export class MyApp {
 
   rootPage: string = "HomePage";
 
-  pages: Array<{title: string, component: string}>;
+  pages: Array<{title: string, component: string, icon: string}>;
 
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
@@ -23,14 +23,13 @@ export class MyApp {
     this.initializeApp();
     
     this.pages = [
-      { title : 'Principal', component: 'PrincipalPage'},
-      { title : 'Cadastros', component: 'CadastrosPage'},
-      { title : 'Reservas', component: 'CadastrosPage'},
-      { title : 'Consultas', component: 'SearchPage'},
-      { title : 'Relatório', component: 'RelatoriosPage'},
-      { title : 'Logout', component : ''}
+      { title : 'Principal', component: 'PrincipalPage', icon: 'ios-home'},
+      { title : 'Cadastros', component: 'CadastrosPage', icon: 'ios-clipboard'},
+      { title : 'Reservas', component: 'ReservasPage', icon: 'ios-calendar'},
+      { title : 'Consultas', component: 'SearchPage', icon: 'ios-bookmarks'},
+      { title : 'Relatório', component: 'RelatoriosPage', icon: 'ios-list-box'},
+      { title : 'Logout', component : '', icon: 'ios-exit'}
     ]
-  
   }
 
   initializeApp() {

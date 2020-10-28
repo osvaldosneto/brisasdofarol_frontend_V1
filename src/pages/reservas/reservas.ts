@@ -46,23 +46,27 @@ export class ReservasPage {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.hospedagemService.findAll()
       .subscribe(response => {
         this.hospedagens = response;
-        this.formGroup.controls.idHospedagem.setValue(this.hospedagens[0].id);
+        this.formGroup.controls.idHospedagem.setValue('*selecione uma hospedagem');
         this.formGroup.controls.tipoLimpeza.setValue(1);
         this.formGroup.controls.tipoIntermedio.setValue(1);
         this.setNumeroHospedes(Number(this.hospedagens[0].maximoHospedes))
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
     this.clienteService.findAll()
       .subscribe(response =>{
         this.clientes = response
-        this.formGroup.controls.idCliente.setValue(this.clientes[0].id)
+        this.formGroup.controls.idCliente.setValue('*selecione um hospede')
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
   }
@@ -144,6 +148,8 @@ export class ReservasPage {
         this.showInsertOk();
       },
       error =>{
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
       })
   }
 
@@ -156,7 +162,7 @@ export class ReservasPage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.setRoot("CadastrosPage");
+            this.navCtrl.setRoot("PrincipalPage");
           }
         }
       ]

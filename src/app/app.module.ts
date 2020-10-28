@@ -1,3 +1,4 @@
+import { JardimService } from './../services/domain/jardim.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http"
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -32,6 +33,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HospedagemService,
+    JardimService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,

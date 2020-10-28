@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Cadastro Cliente</ion-title>
+    <ion-title>Edição de  Cliente</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -45,18 +45,18 @@
 
     <ion-item>
       <ion-label stacked>Telefone*</ion-label>
-      <ion-input formControlName="telefone1" type="text" value="{{cliente?.telefones[0]}}"></ion-input>
+      <ion-input formControlName="telefone1" type="text" value="{{cliente?.telefones[1]}}"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.telefone1.dirty && formGroup.controls.telefone1.errors" margin-left>Telefone inválido</p>
     
     <ion-item>
       <ion-label stacked>Telefone</ion-label>
-      <ion-input formControlName="telefone2" type="text" value="{{cliente?.telefones[1]}}"></ion-input>
+      <ion-input formControlName="telefone2" type="text" value="{{cliente?.telefones[2]}}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Telefone</ion-label>
-      <ion-input formControlName="telefone3" type="text" value="{{cliente?.telefones[2]}}"></ion-input>
+      <ion-input formControlName="telefone3" type="text" value="{{cliente?.telefones[3]}}"></ion-input>
     </ion-item>
 
     <ion-item>

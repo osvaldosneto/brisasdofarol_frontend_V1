@@ -19,22 +19,21 @@ export class HomePage {
     public navCtrl: NavController, 
     public menu : MenuController,
     public auth : AuthService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
     ) {
 
   }
 
-  ionViewWillEnter(){
-    this.menu.swipeEnable(false)
-  }
-
   ionViewDidEnter() {
+    let loader = this.presentLoading();
     this.auth.refreshToken()
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('PrincipalPage');
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
       });  
   }
 
@@ -47,6 +46,7 @@ export class HomePage {
         this.navCtrl.setRoot("PrincipalPage")
       },
       error => {
+        loader.dismiss();
       });
   }
 

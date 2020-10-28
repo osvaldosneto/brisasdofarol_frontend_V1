@@ -7,10 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home">
   <form [formGroup]="formGroup" (ngSubmit)="searchCusto(); $event.preventDefault()">
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label stacked>Descrição</ion-label>
       <ion-select formControlName="nome">
         <ion-option *ngFor="let i of item; first as f" [value]="i" [selected]="f">{{i}}</ion-option>
@@ -18,13 +18,13 @@
     </ion-item>
     <br>
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label position="floating">Data inicio pesquisa</ion-label>
       <ion-datetime formControlName="datainicio" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
     </ion-item>
     <br>
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label position="floating">Data fim pesquisa</ion-label>
       <ion-datetime formControlName="datafim" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
     </ion-item>
@@ -32,24 +32,27 @@
     <button ion-button block type="submit" >Pesquisar</button>
   </form>
 
-  <ion-item *ngIf="exist">
-    <ion-row class="tabela">
-      <ion-col>Data</ion-col>
-      <ion-col>Descrição</ion-col>
-      <ion-col>valor</ion-col>
-      <ion-col>Ação</ion-col>
-    </ion-row>
-    <div class="tabela" *ngFor="let l of lista">
-      <ion-row>
-        <ion-col>{{ l?.dataPagamento }}</ion-col>
-        <ion-col>{{ l?.nome }}</ion-col>
-        <ion-col>{{ l?.valor | currency }} </ion-col>
-        <ion-col>
-          <ion-icon name="trash" item-end  color="danger" (click)="removeCusto(l.id)"></ion-icon>
-          <ion-icon  name="add-circle" color="primary" (click)="editCusto(l.id)"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </div>
-  </ion-item>
-
+  <div *ngIf="exist">
+    <ion-card *ngFor="let l of lista" class="form">
+      <ion-card-header>
+        <ion-row>Descrição : {{ l?.nome }}</ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>Data : {{ l?.dataPagamento }}</ion-row>
+        <ion-row>Valor : {{ l?.valor | currency }}</ion-row>
+        <ion-col></ion-col>
+        <ion-row align-end >
+          <button class="btn" ion-button outline color="danger" round small end (click)="removeCusto(l.id)">
+            Delete
+          </button>
+          <button class="btn" ion-button outline color="secondary" round small end (click)="editCusto(l.id)">
+            Edit
+          </button>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
 </ion-content>
+
+

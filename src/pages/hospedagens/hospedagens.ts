@@ -94,7 +94,7 @@ export class HospedagensPage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.setRoot("CadastrosPage");
+            this.navCtrl.setRoot("PrincipalPage");
           }
         }
       ]

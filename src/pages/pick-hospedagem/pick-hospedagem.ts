@@ -22,6 +22,7 @@ export class PickHospedagemPage {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.hospedagemService.findAll()
       .subscribe(response =>{
         this.hospedagens = response
@@ -29,6 +30,7 @@ export class PickHospedagemPage {
       error => {
         this.navCtrl.setRoot("PrincipalPage");
       })
+    loader.dismiss();
   }
 
   searchHospedagem(id : string){
@@ -64,75 +66,8 @@ export class PickHospedagemPage {
     alert.present();
   }
 
-  removeHospedagem(id : string){
-    let loader = this.presentLoading();
-    this.hospedagemService.findById(id)
-      .subscribe(response =>{
-        this.hospedagem = response
-        loader.dismiss();
-        this.showDeleteOk()
-      },
-      error => {
-        this.navCtrl.setRoot("PrincipalPage");
-      })
-  }
-
   editHospedagem(id : string){
     this.navCtrl.push("EditHospedagemPage", {hospedagem_id : id})
-  }
-
-  showDeleteOk() {
-    let alert = this.alertCtrl.create({
-      title: 'Deletando Hospedagem!',
-      message: 'Você tem certeza que deseja excluir a hospedagem ' + this.hospedagem.nome,
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: 'Sim',
-          handler: () => {
-            this.confirmaDeleta()
-            this.showDeletado()
-            this.navCtrl.setRoot("PrincipalPage");
-          }
-        },
-        {
-          text: 'Não',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  confirmaDeleta(){
-    let loader = this.presentLoading();
-    this.hospedagemService.removeHospedagem(this.hospedagem.id)
-      .subscribe(repsponse =>{
-        loader.dismiss();
-        this.navCtrl.push("PrincipalPage");
-      },
-      error => {
-        loader.dismiss();
-        this.navCtrl.setRoot("PrincipalPage");
-      });
-  }
-
-  showDeletado(){
-    let alert = this.alertCtrl.create({
-      title: 'Deletado!',
-      message: 'Hospedagem deletada com sucesso',
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.navCtrl.setRoot("PrincipalPage");
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 
   presentLoading() {

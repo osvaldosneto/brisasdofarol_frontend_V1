@@ -5,8 +5,8 @@ import { ReservaDTO } from "../../models/reserva.dto";
 
 @Injectable()
 export class ReservaService{
-    constructor(public http : HttpClient){
 
+    constructor(public http : HttpClient){
     }
 
     findAll(){
@@ -29,10 +29,12 @@ export class ReservaService{
     }
 
     findByData(obj: any){
-        if(obj.data == null){
+        if(obj.dataFim == null && obj.dataInicio == null){
             return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/all`)
-        } else {
-            return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/filtrodata?data=${obj.data}`);
+        } else if(obj.dataInicio != null && obj.dataFim == null){
+            return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/filtrodata?data=${obj.dataInicio}`);
+        } else if(obj.dataInicio != null && obj.dataFim != null){
+            return this.http.get<ReservaDTO[]>(`${API_CONFIG.baseUrl}/reservas/entredatas?dia1=${obj.dataInicio}&dia2=${obj.dataFim}`);
         }
     }
 

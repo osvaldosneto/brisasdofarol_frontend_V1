@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>jardim</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  
+  <div class="home">
+    <form [formGroup]="formGroup" (ngSubmit)="changeStatus(); $event.preventDefault()" class="home">
+      <ion-list class="form" radio-group formControlName="status">
+        <ion-list-header class="form">
+          Status Irrigação
+        </ion-list-header>
+        <ion-item class="form">
+          <ion-label class="form">Ativar</ion-label>
+          <ion-radio checked="true" value="ATIVO"></ion-radio>
+        </ion-item>
+        <ion-item class="form">
+          <ion-label class="form">Desativar</ion-label>
+          <ion-radio value="INATIVO"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <button ion-button block type="submit" [disabled]="formGroup.invalid">Confirma</button>
+    </form>
+    <br>
+  </div>
+
+</ion-content>
+
+

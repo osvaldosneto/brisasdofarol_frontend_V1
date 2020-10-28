@@ -11,10 +11,6 @@ export class CadastrosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   cadastroCliente(){
     this.navCtrl.push("ClientePage");
   }

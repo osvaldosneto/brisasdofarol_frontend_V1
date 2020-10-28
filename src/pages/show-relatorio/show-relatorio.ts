@@ -46,7 +46,7 @@ export class ShowRelatorioPage {
     let soma = 0
     for(let r of this.reservas){
       r.checkIn = (r.checkIn.substr(0, 10).split('-').reverse().join('/'));
-      r.checkOut = (r.checkIn.substr(0, 10).split('-').reverse().join('/'));
+      r.checkOut = (r.checkOut.substr(0, 10).split('-').reverse().join('/'));
       soma += Number(r.total)
     }
     this.totalReceita = soma

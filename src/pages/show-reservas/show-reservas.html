@@ -8,36 +8,18 @@
 </ion-header>
 
 <ion-content padding>
-
-  <ion-item>
-    <br>
-    <ion-row class="tabela">
-      <ion-col><h3>Local</h3></ion-col>
-      <ion-col><h3>Nome</h3></ion-col>
-      <ion-col><h3>In</h3></ion-col>
-      <ion-col><h3>Out</h3></ion-col>
-      <ion-col><h3>Total</h3></ion-col>
-    </ion-row>
-    <div *ngFor="let r of reservas">
-      <ion-row class="tabela">
-        <ion-col>{{ r.hospedagem.nome }}</ion-col>
-        <ion-col>{{ r.cliente.nome }}</ion-col>
-        <ion-col>{{ r.checkIn }}</ion-col>
-        <ion-col>{{ r.checkOut }}</ion-col>
-        <ion-col>{{ r.total | currency}}</ion-col>
-        <ion-icon name="trash" item-end  color="danger" (click)="removeReserva(r.id)"></ion-icon>
-      </ion-row>
-    </div>
-  </ion-item>
-  <ion-item>
-    <div>
-      <ion-row class="tabela">
-        <ion-col><h3>TOTAL</h3></ion-col>
+  <div *ngFor="let r of reservas">
+    <ion-card class="form">
+      <ion-card-header>
+        <ion-row>Cliente : {{ r.cliente.nome }}</ion-row>
+        <ion-row>Hospedagem : {{ r.hospedagem.nome }}</ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>Datas : {{ r.checkIn }} até {{ r.checkOut }}</ion-row>
+        <ion-row>Valor : {{ r.total | currency }}</ion-row>
         <ion-col></ion-col>
-        <ion-col></ion-col>
-        <ion-col></ion-col>
-        <ion-col>{{ total | currency}}</ion-col>
-      </ion-row>
-    </div>
-  </ion-item>
+        <ion-row align-end ><button class="btn" ion-button outline color="danger" round small end (click)="removeReserva(r.id)">Delete</button></ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

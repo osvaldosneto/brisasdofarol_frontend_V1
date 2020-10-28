@@ -1,5 +1,37 @@
 page-edit-hospedagem {
-    .danger {
-        color: red;
+    .toolbar-background {
+        background-color: rgb(115, 175, 154);
+    }
+
+    h3 {
+        font-family: "Arial Black", Gadget, sans-serif;
+        text-align: center;
+    }
+
+    .but {
+        font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 40px;
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        color: rgb(58, 18, 18);
+        font-weight: 700;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: small-caps;
+        text-transform: none;
+        text-align: center;
+        background: rgb(129, 196, 172);
+        border: 2px groove #70613B;
+        border-radius: 29px 40px 0px 40px;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        align-self: center;
+        margin: auto;
+        display: block;
+        padding: 10px;
+        background: rgb(129, 196, 172);
     }
 }

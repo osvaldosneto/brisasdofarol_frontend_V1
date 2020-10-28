@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { CidadeService } from '../../services/domain/cidade.service';
@@ -27,7 +27,8 @@ export class EditClientePage {
     public estadoService: EstadoService,
     public cidadeService: CidadeService,
     public alertCtrl: AlertController,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    public loadingCtrl: LoadingController) {
 
       this.formGroup = this.formBuilder.group({
         nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -46,41 +47,60 @@ export class EditClientePage {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.id = this.navParams.get('cliente_id');
     this.clienteService.findById(this.id)
       .subscribe(response => {
         this.cliente = response
+        this.setEstadosMunicipios()
+        loader.dismiss();
       },
-      error => {});
+      error => {
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
+      });
+  }
 
+  setEstadosMunicipios(){
     this.estadoService.findAll()
-    .subscribe(response => {
-      this.estados = response;
-      this.formGroup.controls.estadoId.setValue(this.estados[0].id);
-      this.updateCidades();
-    },
-    error => {});
+      .subscribe(response => {
+        this.estados = response;
+        this.formGroup.controls.estadoId.setValue(this.cliente.endereco.cidade.estado.id);
+        this.updateCidades();
+        
+      },
+      error => {
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   updateCidades() {
+    let loader = this.presentLoading();
     let estado_id = this.formGroup.value.estadoId;
     this.cidadeService.findAll(estado_id)
       .subscribe(response => {
         this.cidades = response;
-        this.formGroup.controls.cidadeId.setValue(null);
+        this.formGroup.controls.cidadeId.setValue(this.cliente.endereco.cidade.id)
+        loader.dismiss();
       },
-      error => {});
+      error => {
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
+      });
   }
 
   editClient(){
+    let loader = this.presentLoading();
     this.clienteService.deleteEmail(this.id)
       .subscribe(response =>{
       })
     this.clienteService.putCliente(this.formGroup.value, this.id)
       .subscribe(response => {
+        loader.dismiss();
         this.showInsertOk();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       }); 
   }
@@ -100,6 +120,14 @@ export class EditClientePage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

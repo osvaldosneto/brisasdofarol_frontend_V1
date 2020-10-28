@@ -7,17 +7,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home">
   <br>
   <br>
 
-  <ion-item>
+  <ion-item class="home">
     <ion-list>
-      <ion-item no-lines  *ngFor="let h of hospedagens">
-        <h2>{{h.nome}}</h2>
-        <ion-icon name="search" item-end (click)="searchHospedagem(h.id)"></ion-icon>
-        <ion-icon name="trash" item-end  (click)="removeHospedagem(h.id)"></ion-icon>
-        <ion-icon  name="create-outline" item-end (click)="editHospedagem(h.id)"></ion-icon>
+      <ion-item *ngFor="let h of hospedagens" class="home">
+        <button class="home" (click)="searchHospedagem(h.id)">
+          <h2>{{h.nome}}</h2>
+        </button>
+        <ion-icon  name="create" item-right (click)="editHospedagem(h.id)"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-item>

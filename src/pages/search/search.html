@@ -7,31 +7,32 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content padding class="home">
   <ion-list>
-    <br>
-    <button ion-item (click)="searchReserva()">
+    <button class="but" ion-item (click)="searchReserva()">
       <ion-thumbnail item-start>
-        <img src="assets/imgs/calendaricon.png">
+        <img src="assets/imgs/rent.png">
       </ion-thumbnail>
       <h2> Reservas </h2>
     </button>
-    <button ion-item (click)="searchHospedagem()">
+    <br>
+    <button class="but" ion-item (click)="searchHospedagem()">
       <ion-thumbnail item-start>
-        <img src="assets/imgs/houseicon.png">
+        <img src="assets/imgs/hospedagem.png">
       </ion-thumbnail>
       <h2> Hospedagens </h2>
     </button>
-    <button ion-item (click)="searchClientes()">
+    <br>
+    <button class="but" ion-item (click)="searchClientes()">
       <ion-thumbnail item-start>
-        <img src="assets/imgs/personicon.png">
+        <img src="assets/imgs/pessoas.png">
       </ion-thumbnail>
       <h2> Hospedes </h2>
     </button>
-    <button ion-item  (click)="searchCustos()">
+    <br>
+    <button class="but" ion-item  (click)="searchCustos()">
       <ion-thumbnail item-start>
-        <img src="assets/imgs/moneyicon.png">
+        <img src="assets/imgs/gastos.png">
       </ion-thumbnail>
       <h2> Custos </h2>
     </button>

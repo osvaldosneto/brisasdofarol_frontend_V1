@@ -1,6 +1,6 @@
 
 <ion-header>
-  <ion-navbar>
+  <ion-navbar >
     <button ion-button menuToggle>
       <ion-icon name = "menu"></ion-icon>
     </button>
@@ -8,33 +8,41 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home">
   <ion-list>
-    <br>
-    <button ion-item (click)="cadastros()">
+    <button class="but" ion-item (click)="cadastros()">
       <ion-thumbnail item-start>
         <img src="assets/imgs/cadastros.png">
       </ion-thumbnail>
       <h2> Cadastros </h2>
     </button>
-    <button ion-item (click)="relatorios()">
+    <br>
+    <button class="but" ion-item (click)="relatorios()">
       <ion-thumbnail item-start>
         <img src="assets/imgs/relatorio.png">
       </ion-thumbnail>
       <h2> Relatórios </h2>
     </button>
-    <button ion-item (click)="msg()">
+    <br>
+    <button class="but" ion-item (click)="msg()">
       <ion-thumbnail item-start>
         <img src="assets/imgs/msg.png">
       </ion-thumbnail>
       <h2> Mensagens </h2>
     </button>
-    <button ion-item (click)="search()">
+    <br>
+    <button class="but" ion-item (click)="search()">
       <ion-thumbnail item-start >
         <img src="assets/imgs/search.png">
       </ion-thumbnail>
       <h2> Consultas </h2>
     </button>
-
+    <br>
+    <button class="but" ion-item (click)="jardim()">
+      <ion-thumbnail item-start >
+        <img src="assets/imgs/agricultura.png">
+      </ion-thumbnail>
+      <h2> Jardim </h2>
+    </button>
   </ion-list>
 </ion-content>

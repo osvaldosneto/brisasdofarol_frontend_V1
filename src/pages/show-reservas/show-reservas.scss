@@ -4,13 +4,14 @@ page-show-reservas {
         padding:0px 0px;
     }
 
-    .tabela{
-        align-self: center;
-        text-align: center;
-        font-size: 8px;
+    .form{
+        background:  rgb(225, 226, 223);
+        font-weight: 900;
+        font-size: 14px;
     }
 
-    .col{
-        max-width :20% !important;
-      }
+    .btn{
+        padding: padding-end;
+    }
+
 }

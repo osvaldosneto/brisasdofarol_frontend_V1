@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CustoService } from '../../services/domain/custo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
@@ -22,9 +22,10 @@ export class PickCustosPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public custoService: CustoService,
-    public alertCtrl: AlertController,) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
 
-      this.item = ["Energia", "Internet", "Água", "Outros", "*Todos"]
+      this.item = ["*Todos", "Energia", "Internet", "Água", "Outros"]
       this.exist = false
 
       this.formGroup = this.formBuilder.group({
@@ -34,15 +35,23 @@ export class PickCustosPage {
       });
   }
 
+  ionViewDidLoad() {
+    this.formGroup.controls.nome.setValue(this.item[0])
+   // this.formGroup.controls.idHospedagem.setValue('*selecione uma hospedagem');
+  }
+
   searchCusto(){
+    let loader = this.presentLoading();
     this.custoService.findByNomeData(this.formGroup.value)
       .subscribe(response =>{
         this.lista = response
         this.formatData()
         this.exist = true
+        loader.dismiss()
       },
       error => {
         this.navCtrl.setRoot("PrincipalPage");
+        loader.dismiss()
       });
   }
 
@@ -110,6 +119,14 @@ export class PickCustosPage {
 
   editCusto(id : string){
     this.navCtrl.push("EditCustoPage", {custo_id: id});
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

@@ -3,75 +3,73 @@
     <button ion-button menuToggle>
       <ion-icon name = "menu"></ion-icon>
     </button>
-    <ion-title><h3>Cadastro Reservas</h3></ion-title>
+    <ion-title><h3>Cadastro Reserva</h3></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="home">
 
-  <form [formGroup]="formGroup" (ngSubmit)="addReserva(); $event.preventDefault()">
+  <form [formGroup]="formGroup" (ngSubmit)="addReserva(); $event.preventDefault()" class="home">
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label stacked>Cliente*</ion-label>
       <ion-select formControlName="idCliente">
+        <ion-option>*selecione um hospede</ion-option>
         <ion-option *ngFor="let c of clientes; first as a" [value]="c.id" [selected]="a">{{c.nome}} - {{c.email}}</ion-option>
       </ion-select>
     </ion-item>
-    <br><br>
-    <ion-item>
+    <br>
+    <ion-item class="form">
       <ion-label stacked>Hospedagem*</ion-label>
       <ion-select formControlName="idHospedagem" (ionChange)="updateHospedagem()">
+        <ion-option>*selecione uma hospedagem</ion-option>
         <ion-option *ngFor="let h of hospedagens; first as a" [value]="h.id" [selected]="a" >{{h.nome}}</ion-option>
       </ion-select>
     </ion-item>
-   
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label position="floating">Data CheckIn*</ion-label>
       <ion-datetime formControlName="checkIn" value="data" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.checkIn.dirty && formGroup.controls.checkIn.errors" margin-left>Preencha a data de entrada</p>
-
     <br>
-    <ion-item>
+    <ion-item class="form">
       <ion-label position="floating">Data CheckOut*</ion-label>
       <ion-datetime formControlName="checkOut" value="data" displayFormat="DD/MM/YYYY" min="2019-10-01" max="2050-12-31"></ion-datetime>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.checkOut.dirty && formGroup.controls.checkOut.errors" margin-left>Preencha a data de saída</p>
-    
-    <br><br>
-    <ion-list radio-group formControlName="tipoIntermedio">
-      <ion-list-header>
+    <br>
+    <ion-list class="form" radio-group formControlName="tipoIntermedio">
+      <ion-list-header class="form">
         Tipo de intermedio*
       </ion-list-header>
-      <ion-item>
-        <ion-label>AirbnB</ion-label>
+      <ion-item class="form">
+        <ion-label class="form">AirbnB</ion-label>
         <ion-radio checked="true" value="1"></ion-radio>
       </ion-item>
-      <ion-item>
-        <ion-label>outros</ion-label>
+      <ion-item class="form">
+        <ion-label class="form">outros</ion-label>
         <ion-radio value="0"></ion-radio>
       </ion-item>
     </ion-list>
     <p class="danger" *ngIf="formGroup.controls.tipoIntermedio.dirty && formGroup.controls.tipoIntermedio.errors" margin-left>Preencha o tipo de intermédio</p>
-
     <br>
-    <ion-list radio-group formControlName="tipoLimpeza">
-      <ion-list-header>
+    <ion-list class="form" radio-group formControlName="tipoLimpeza">
+      <ion-list-header class="form">
         Taxa Limpeza*
       </ion-list-header>
-      <ion-item>
+      <ion-item class="form">
         <ion-label>Sim</ion-label>
         <ion-radio checked="true" value="1"></ion-radio>
       </ion-item>
-      <ion-item>
+      <ion-item class="form">
         <ion-label>Não</ion-label>
         <ion-radio value="0"></ion-radio>
       </ion-item>
     </ion-list>
     <p class="danger" *ngIf="formGroup.controls.tipoLimpeza.dirty && formGroup.controls.tipoLimpeza.errors" margin-left>Preencha a taxa de limpeza</p>
     
-    <ion-item>
+    <ion-item class="form">
       <ion-label stacked>Número Hospedes*</ion-label>
       <ion-select formControlName="numeroHospedes">
         <ion-option *ngFor="let i of numeroHosp" [value]="i+1">{{i+1}}</ion-option>
@@ -79,13 +77,11 @@
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.numeroHospedes.dirty && formGroup.controls.numeroHospedes.errors" margin-left>Preencha o número de hospedes</p>
     
-    <ion-item>
+    <ion-item class="form">
       <ion-label stacked>Desconto*</ion-label>
-      <ion-input formControlName="desconto" value="00.0" type="number"></ion-input>
+      <ion-input formControlName="desconto" placeholder="0,00" type="number"></ion-input>
     </ion-item>
-
+    <br>
     <button ion-button block type="submit" [disabled]="formGroup.invalid">Confirma Reserva</button>
-  
   </form>
-
 </ion-content>

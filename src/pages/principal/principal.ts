@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,11 +8,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PrincipalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public menuCtrl: MenuController) {
   }
 
   cadastros() {
@@ -29,6 +27,10 @@ export class PrincipalPage {
 
   search(){
     this.navCtrl.push("SearchPage");
+  }
+
+  jardim(){
+    this.navCtrl.push("JardimPage");
   }
 
 }

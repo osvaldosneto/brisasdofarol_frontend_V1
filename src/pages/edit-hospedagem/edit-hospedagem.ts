@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EstadoService } from '../../services/domain/estado.service';
 import { CidadeService } from '../../services/domain/cidade.service';
@@ -20,6 +20,8 @@ export class EditHospedagemPage {
   estados: EstadoDTO[]
   cidades: CidadeDTO[]
   hospedagem: HospedagemDto
+  id: string
+  hosp: any
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -27,7 +29,8 @@ export class EditHospedagemPage {
     public estadoService: EstadoService,
     public cidadeService: CidadeService,
     public alertCtrl: AlertController,
-    public hospedagemService : HospedagemService) {
+    public hospedagemService : HospedagemService,
+    public loadingCtrl: LoadingController) {
 
       this.formGroup = this.formBuilder.group({
         nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
@@ -47,37 +50,78 @@ export class EditHospedagemPage {
   }
 
   ionViewDidLoad() {
-    
+    let loader = this.presentLoading();
+    this.id = this.navParams.get('hospedagem_id');
+    this.hospedagemService.findById(this.navParams.get('hospedagem_id'))
+      .subscribe(response =>{
+        this.hospedagem = response;
+        this.hosp = response;
+        this.setEstadosMunicipios()
+        loader.dismiss();
+      },
+      error => {
+        loader.dismiss();
+        this.navCtrl.setRoot("PrincipalPage");
+      })
+  }
+
+  setEstadosMunicipios(){
     this.estadoService.findAll()
       .subscribe(response => {
         this.estados = response;
-        this.formGroup.controls.estadoId.setValue(this.estados[0].id);
+        this.formGroup.controls.estadoId.setValue(this.hosp.endereco.cidade.estado.id);
         this.updateCidades();
       },
       error => {
         this.navCtrl.setRoot("PrincipalPage");
       });
-
-    this.hospedagemService.findById(this.navParams.get('hospedagem_id'))
-      .subscribe(response =>{
-        let h = response
-        this.hospedagem = h
-      },
-      error => {
-        this.navCtrl.setRoot("PrincipalPage");
-      })
   }
 
   updateCidades() {
+    let loader = this.presentLoading();
     let estado_id = this.formGroup.value.estadoId;
     this.cidadeService.findAll(estado_id)
       .subscribe(response => {
         this.cidades = response;
-        this.formGroup.controls.cidadeId.setValue(null);
+        this.formGroup.controls.cidadeId.setValue(this.hosp.endereco.cidade.id)
+        loader.dismiss();
       },
       error => {
+        loader.dismiss();
         this.navCtrl.setRoot("PrincipalPage");
       });
+  }
+  
+  updateHospedagem(){
+    this.hospedagemService.update(this.formGroup.value, this.id)
+      .subscribe(response => {
+        this.showInsertOk();
+      })
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Hospedagem editada com sucesso!!',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot("PrincipalPage");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
   
 }
